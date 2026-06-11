@@ -1,0 +1,6 @@
+{
+  "name": "제주 예술생태계 분석",
+  "description": "제주 문화예술 법인, 예술단체, 공연장, 갤러리 현황을 비교 분석하고 가중치 기반 예술생태계 지수를 정량 평가하며, Gemini AI 분석을 결합하여 지역 불균형 해결 전략과 SWOT 분석을 제시하는 반응형 프리미엄 대시보드입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
