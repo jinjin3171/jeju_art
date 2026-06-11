@@ -8,7 +8,6 @@
   --panel-border: #2d2d2d;
   --subpanel-bg: #0a0a0b;
   --subpanel-border: #2d2d2d;
-  --text-[#dfb35a]: #dfb35a;
   --text-muted: #9ca3af;
   --text-muted-dark: #6b7280;
   --text-title: #dfb35a;
@@ -20,6 +19,29 @@
   --map-hover-si: #1c1813;
   --map-hover-seo: #1c1813;
   --map-active-bg: #231f18;
+
+  /* Chart Colors - High Contrast in Dark Mode */
+  --chart-1: #dfb35a;
+  --chart-2: #caa152;
+  --chart-3: #9e7f41;
+  --chart-4: #dec9a5;
+  --chart-line-1: #dfb35a;
+  --chart-line-2: #ab9573;
+
+  /* Dynamic Icons */
+  --icon-purple: #c084fc;
+  --icon-amber: #fbbf24;
+  --icon-blue: #60a5fa;
+  --icon-emerald: #34d399;
+
+  /* Badges - Gov & Private */
+  --badge-gov-bg: rgba(223, 179, 90, 0.15);
+  --badge-gov-border: rgba(223, 179, 90, 0.3);
+  --badge-gov-text: #dfb35a;
+
+  --badge-private-bg: rgba(142, 122, 83, 0.15);
+  --badge-private-border: rgba(142, 122, 83, 0.3);
+  --badge-private-text: #bda67a;
 }
 
 .light {
@@ -29,7 +51,6 @@
   --panel-border: #dfd9cc;
   --subpanel-bg: #f5f2eb;
   --subpanel-border: #dfd9cc;
-  --text-[#dfb35a]: #caa152;
   --text-muted: #7c7567;
   --text-muted-dark: #968e7f;
   --text-title: #caa152;
@@ -41,6 +62,39 @@
   --map-hover-si: #e1dcd0;
   --map-hover-seo: #e1dcd0;
   --map-active-bg: #dfd9cb;
+
+  /* Chart Colors - Bolder / Darker for light background visibility */
+  --chart-1: #b08125;
+  --chart-2: #94712e;
+  --chart-3: #6e501a;
+  --chart-4: #caa66d;
+  --chart-line-1: #b58d3c;
+  --chart-line-2: #806b4d;
+
+  /* Dynamic Icons - Deepened for high contrast on light mode */
+  --icon-purple: #7e22ce;
+  --icon-amber: #b45309;
+  --icon-blue: #1d4ed8;
+  --icon-emerald: #047857;
+
+  /* Badges - Gov & Private */
+  --badge-gov-bg: rgba(202, 161, 82, 0.1);
+  --badge-gov-border: rgba(202, 161, 82, 0.4);
+  --badge-gov-text: #a87e2a;
+
+  --badge-private-bg: rgba(110, 94, 61, 0.1);
+  --badge-private-border: rgba(110, 94, 61, 0.3);
+  --badge-private-text: #6e5e3d;
+}
+
+html, body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+input[type="range"] {
+  accent-color: var(--text-title);
 }
 
 @theme {

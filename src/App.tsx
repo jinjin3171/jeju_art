@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Landmark,
   Sliders,
@@ -59,6 +59,17 @@ export default function App() {
 
   // 2. 선택된 행정지역 ("제주시" | "서귀포시" | null)
   const [selectedRegion, setSelectedRegion] = useState<"제주시" | "서귀포시" | null>(null);
+
+  // HTML 루트 태그와 테마 동기화 처리
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+  }, [isDarkMode]);
 
   // 3. 지표 데이터 산출 및 계산
   const scores = useMemo(() => {
@@ -231,7 +242,7 @@ export default function App() {
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
                   <label className="text-xs sm:text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide flex items-center gap-1.5 font-sans">
-                    <Theater className="w-3.5 h-3.5 text-purple-400" />
+                    <Theater className="w-3.5 h-3.5 text-[var(--icon-purple)]" />
                     공연장 수 가중치
                   </label>
                   <span className="text-xs font-mono font-bold text-[var(--text-title)] bg-[var(--subpanel-bg)] border border-[var(--panel-border)] px-2.5 py-0.5 rounded-md transition-colors">
@@ -245,7 +256,7 @@ export default function App() {
                   step="0.1"
                   value={venueWeight}
                   onChange={(e) => setVenueWeight(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--text-title)] h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
+                  className="w-full h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
                 />
               </div>
 
@@ -253,7 +264,7 @@ export default function App() {
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
                   <label className="text-xs sm:text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide flex items-center gap-1.5 font-sans">
-                    <Layers3 className="w-3.5 h-3.5 text-amber-400" />
+                    <Layers3 className="w-3.5 h-3.5 text-[var(--icon-amber)]" />
                     갤러리 / 예술마을
                   </label>
                   <span className="text-xs font-mono font-bold text-[var(--text-title)] bg-[var(--subpanel-bg)] border border-[var(--panel-border)] px-2.5 py-0.5 rounded-md transition-colors">
@@ -267,7 +278,7 @@ export default function App() {
                   step="0.1"
                   value={galleryWeight}
                   onChange={(e) => setGalleryWeight(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--text-title)] h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
+                  className="w-full h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
                 />
               </div>
 
@@ -275,7 +286,7 @@ export default function App() {
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
                   <label className="text-xs sm:text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide flex items-center gap-1.5 font-sans">
-                    <Building className="w-3.5 h-3.5 text-blue-400" />
+                    <Building className="w-3.5 h-3.5 text-[var(--icon-blue)]" />
                     문화예술법인 가중치
                   </label>
                   <span className="text-xs font-mono font-bold text-[var(--text-title)] bg-[var(--subpanel-bg)] border border-[var(--panel-border)] px-2.5 py-0.5 rounded-md transition-colors">
@@ -289,7 +300,7 @@ export default function App() {
                   step="0.1"
                   value={corpWeight}
                   onChange={(e) => setCorpWeight(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--text-title)] h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
+                  className="w-full h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
                 />
               </div>
 
@@ -297,7 +308,7 @@ export default function App() {
               <div className="space-y-1">
                 <div className="flex justify-between items-center">
                   <label className="text-xs sm:text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wide flex items-center gap-1.5 font-sans">
-                    <Users className="w-3.5 h-3.5 text-emerald-400" />
+                    <Users className="w-3.5 h-3.5 text-[var(--icon-emerald)]" />
                     예술단체 가중치
                   </label>
                   <span className="text-xs font-mono font-bold text-[var(--text-title)] bg-[var(--subpanel-bg)] border border-[var(--panel-border)] px-2.5 py-0.5 rounded-md transition-colors">
@@ -311,7 +322,7 @@ export default function App() {
                   step="0.1"
                   value={groupWeight}
                   onChange={(e) => setGroupWeight(parseFloat(e.target.value))}
-                  className="w-full accent-[var(--text-title)] h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
+                  className="w-full h-1 bg-[var(--panel-border)] rounded-lg cursor-pointer transition-colors"
                 />
               </div>
             </div>
@@ -363,10 +374,10 @@ export default function App() {
                     }}
                   />
                   <Legend verticalAlign="bottom" height={36} iconType="circle" formatter={renderLegendText} />
-                  <Bar dataKey="공연장 점수" stackId="a" fill="#dfb35a" name="공연장 스코어" />
-                  <Bar dataKey="갤러리 점수" stackId="a" fill="#caa152" name="갤러리 스코어" />
-                  <Bar dataKey="법인 점수" stackId="a" fill="#ae8a4b" name="법인 스코어" />
-                  <Bar dataKey="예술단체 점수" stackId="a" fill="#dec9a5" name="예술단체 스코어" />
+                  <Bar dataKey="공연장 점수" stackId="a" fill="var(--chart-1)" name="공연장 스코어" />
+                  <Bar dataKey="갤러리 점수" stackId="a" fill="var(--chart-2)" name="갤러리 스코어" />
+                  <Bar dataKey="법인 점수" stackId="a" fill="var(--chart-3)" name="법인 스코어" />
+                  <Bar dataKey="예술단체 점수" stackId="a" fill="var(--chart-4)" name="예술단체 스코어" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -399,10 +410,10 @@ export default function App() {
                     }}
                   />
                   <Legend verticalAlign="bottom" height={36} iconType="circle" formatter={renderLegendText} />
-                  <Bar dataKey="공연장 수" fill="#f5cb74" radius={[3, 3, 0, 0]} />
-                  <Bar dataKey="갤러리 수" fill="#dfb35a" radius={[3, 3, 0, 0]} />
-                  <Bar dataKey="법인 수" fill="#b49a6c" radius={[3, 3, 0, 0]} />
-                  <Bar dataKey="예술단체 수" fill="#8c734b" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="공연장 수" fill="var(--chart-1)" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="갤러리 수" fill="var(--chart-2)" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="법인 수" fill="var(--chart-3)" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="예술단체 수" fill="var(--chart-4)" radius={[3, 3, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -441,8 +452,8 @@ export default function App() {
                   }}
                 />
                 <Legend verticalAlign="top" height={36} iconType="circle" formatter={renderLegendText} />
-                <Line type="monotone" dataKey="제주시" stroke="#dfb35a" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                <Line type="monotone" dataKey="서귀포시" stroke="#ab9573" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                <Line type="monotone" dataKey="제주시" stroke="var(--chart-line-1)" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                <Line type="monotone" dataKey="서귀포시" stroke="var(--chart-line-2)" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -459,7 +470,7 @@ export default function App() {
         </section>
 
         {/* 푸터 영역 */}
-        <footer className="text-center text-gray-500 text-[10px] uppercase tracking-wider py-8 border-t border-[var(--panel-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+        <footer className="text-center text-[var(--text-muted)] text-[10px] uppercase tracking-wider py-8 border-t border-[var(--panel-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
           <p>© 2026 제주 예술생태계 지수 분석 시스템. 모든 권리 보유.</p>
           <div className="flex gap-4 self-center justify-center">
             <a href="#ai-analysis-panel" className="hover:text-[var(--text-title)] transition-colors">AI SWOT 분석 보고서</a>

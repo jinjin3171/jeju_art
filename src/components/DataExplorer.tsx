@@ -22,7 +22,7 @@ interface DataExplorerProps {
   isDarkMode?: boolean;
 }
 
-export const DataExplorer: React.FC<DataExplorerProps> = ({ selectedRegion }) => {
+export const DataExplorer: React.FC<DataExplorerProps> = ({ selectedRegion, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState<"venues" | "corporations" | "groups" | "galleries">("venues");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
@@ -240,7 +240,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({ selectedRegion }) =>
                   <tr key={item.id} className="hover:bg-[var(--preset-btn-bg)]/30 transition-colors">
                     <td className="p-4 font-semibold text-[var(--text-white-invert)]">{item.name}</td>
                     <td className="p-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${item.type === "공공" ? "bg-[var(--text-title)]/10 text-[var(--text-title)] border border-[var(--text-title)]/30" : "bg-[var(--subpanel-bg)] text-[var(--text-muted)] border border-[var(--panel-border)]"}`}>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${item.type === "공공" ? "bg-[var(--badge-gov-bg)] text-[var(--badge-gov-text)] border border-[var(--badge-gov-border)]" : "bg-[var(--subpanel-bg)] text-[var(--text-muted)] border border-[var(--panel-border)]"}`}>
                         {item.type}
                       </span>
                     </td>
@@ -472,7 +472,7 @@ export const DataExplorer: React.FC<DataExplorerProps> = ({ selectedRegion }) =>
                   <tr key={item.id} className="hover:bg-[var(--preset-btn-bg)]/30 transition-colors">
                     <td className="p-4 font-semibold text-[var(--text-white-invert)]">{item.name}</td>
                     <td className="p-4">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#8e7a53]/10 text-[var(--text-muted)] border border-[#8e7a53]/30">
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${item.type === "도립/시립" ? "bg-[var(--badge-gov-bg)] text-[var(--badge-gov-text)] border border-[var(--badge-gov-border)]" : "bg-[var(--badge-private-bg)] text-[var(--badge-private-text)] border border-[var(--badge-private-border)]"}`}>
                         {item.type}
                       </span>
                     </td>
